@@ -156,13 +156,13 @@ class Resque_Job
 	 *
 	 * @return array Array of arguments.
 	 */
-	public function getArguments()
+	public function getArguments(): array
 	{
 		if (!isset($this->payload['args'])) {
 			return array();
 		}
 
-		return $this->payload['args'][0];
+		return $this->payload['args'][0] ?? [];
 	}
 
 	/**
