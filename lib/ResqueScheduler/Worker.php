@@ -2,6 +2,9 @@
 
 declare(ticks=1);
 
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
+
 /**
  * ResqueScheduler worker to handle scheduling of delayed tasks.
  *
@@ -35,6 +38,9 @@ class ResqueScheduler_Worker
 	 * @var boolean True if this worker is paused.
 	 */
 	private $paused = false;
+
+
+	protected LoggerInterface $logger;
 
 	/**
 	* The primary loop for a worker.
@@ -129,20 +135,22 @@ class ResqueScheduler_Worker
 		}
 	}
 
+	public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
 	/**
-	 * Output a given log message to STDOUT.
+	 * Log $message
 	 *
 	 * @param string $message Message to output.
 	 */
-	public function log($message)
+	public function log($message, $level = LogLevel::INFO)
 	{
-		if ($this->logLevel == self::LOG_NORMAL) {
-			fwrite(STDOUT, "*** " . $message . "\n");
-		} elseif ($this->logLevel == self::LOG_VERBOSE) {
-			fwrite(STDOUT, "** [" . strftime('%T %Y-%m-%d') . "] " . $message . "\n");
-		}
+	    if ($this->logger) {
+	        $this->logger->log($level, $message);
+        }
 	}
-
 	/**
 	 * Register signal handlers that a worker should respond to.
 	 *
