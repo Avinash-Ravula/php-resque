@@ -460,12 +460,12 @@ class Some_Stub_Factory implements Resque_Job_FactoryInterface
 {
 
 	/**
-	 * @param $className
+	 * @param string $className
 	 * @param array $args
-	 * @param $queue
+	 * @param string $queue
 	 * @return Resque_JobInterface
 	 */
-	public function create($className, $args, $queue)
+	public function create(string $className, array $args, string $queue): Resque_JobInterface
 	{
 		return new Some_Job_Class();
 	}
