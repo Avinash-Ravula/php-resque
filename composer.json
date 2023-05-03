@@ -3,7 +3,7 @@
 	"type": "library",
 	"description": "Redis backed library for creating background jobs and processing them later. Based on resque for Ruby.",
 	"keywords": ["job", "background", "redis", "resque"],
-	"homepage": "http://www.github.com/resque/php-resque/",
+	"homepage": "https://www.github.com/resque/php-resque/",
 	"license": "MIT",
 	"authors": [
 		{
@@ -28,10 +28,11 @@
 		}
 	],
 	"require": {
-		"php": ">=5.6.0",
+		"php": ">=7.4",
 		"colinmollenhour/credis": "~1.7",
-		"psr/log": "^1.1"
-	},
+		"psr/log": "^1.1",
+      	"ext-json": "*"
+    },
 	"suggest": {
 		"ext-pcntl": "REQUIRED for forking processes on platforms that support it (so anything but Windows).",
 		"ext-proctitle": "Allows php-resque to rename the title of UNIX processes to show the status of a worker.",
